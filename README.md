@@ -10,11 +10,12 @@ To deploy the backend, create a MongoDB Atlas database, then in Render choose
 string as `MONGODB_URI` when prompted; keep it private. The blueprint configures
 the other production settings and the backend health check.
 
-After Render creates the service, copy its public URL into the Vercel project's
-`VITE_API_URL` environment variable (without a trailing slash), then redeploy the
-frontend. The Vercel origin is already configured as the backend's `CLIENT_URL`.
-New users can register from the website; logins only work for accounts already
-registered in the connected database.
+The frontend includes a Vercel rewrite that sends `/api` requests to the Render
+backend through the Vercel domain. This keeps login/session cookies same-origin;
+no `VITE_API_URL` variable is needed for the provided deployment URLs. The Vercel
+origin is configured as the backend's `CLIENT_URL`. New users can register from
+the website; logins only work for accounts already registered in the connected
+database.
 
 The `MONGODB_URI` must point to a MongoDB Atlas cluster with network access enabled
 for Render. See [MongoDB setup](./restaurant-reservation-system/README.md#setting-up-mongodb-needed-to-keep-data)

@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_URL = `${import.meta.env.VITE_API_URL ?? ""}/api`;
+const API_ORIGIN = import.meta.env.VITE_API_URL?.replace(/\/+$/, "") ?? "";
+const API_URL = `${API_ORIGIN}/api`;
 const REQUEST_TIMEOUT_MS = 30000;
 
 // Every request goes through this one Axios instance, so cookies, the CSRF token,
