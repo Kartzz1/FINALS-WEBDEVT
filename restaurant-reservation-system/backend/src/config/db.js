@@ -22,8 +22,26 @@ async function assertTransactionsSupported() {
 }
 
 export async function connectDb(uri) {
-  await mongoose.connect(uri, { serverSelectionTimeoutMS: CONNECT_TIMEOUT_MS });
-  await assertTransactionsSupported();
+  try {
+    await mongoose.connect(uri, { serverSelectionTimeoutMS: CONNECT_TIMEOUT_MS });
+    await assertTransactionsSupported();
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "";
+    if (error?.code === 18 || /bad auth|authentication failed/i.test(message)) {
+      throw new Error(
+        "MongoDB authentication failed. Verify the Atlas database username and password, and percent-encode special characters in MONGODB_URI."
+      );
+    }
+    if (
+      error?.name === "MongooseServerSelectionError" ||
+      /server selection timed out|ENOTFOUND|ECONNREFUSED|ECONNRESET/i.test(message)
+    ) {
+      throw new Error(
+        "Could not reach MongoDB. Verify MONGODB_URI and allow the hosting service to connect in Atlas Network Access."
+      );
+    }
+    throw error;
+  }
 }
 
 export function getDbStatus() {

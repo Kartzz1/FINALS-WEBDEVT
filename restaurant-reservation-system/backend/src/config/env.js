@@ -20,7 +20,12 @@ function required(name) {
 const nodeEnv = process.env.NODE_ENV || "development";
 const isProduction = nodeEnv === "production";
 
-const storageMode = process.env.STORAGE_MODE || "memory";
+const storageMode = process.env.STORAGE_MODE || (isProduction ? "" : "memory");
+if (!storageMode) {
+  throw new Error(
+    "STORAGE_MODE must be set in production. Use STORAGE_MODE=mongo and provide MONGODB_URI; memory storage is for local development and tests only."
+  );
+}
 if (!STORAGE_MODES.includes(storageMode)) {
   throw new Error(`STORAGE_MODE must be one of: ${STORAGE_MODES.join(", ")}`);
 }
