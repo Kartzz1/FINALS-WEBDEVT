@@ -158,6 +158,12 @@ With the default `STORAGE_MODE=memory` everything is erased when the backend res
 3. Copy the connection string, then in `backend/.env` set `STORAGE_MODE=mongo` and `MONGODB_URI=<your connection string>` (include a database name, for example `.../restaurant-reservations?retryWrites=true&w=majority`).
 4. Restart the backend. It creates the collections and indexes on start.
 
+If startup reports MongoDB authentication failure, verify the **database user**
+credentials in Atlas (they are separate from your Atlas website login), URL-encode
+special characters in the password, and update `MONGODB_URI`. If it cannot reach
+MongoDB, check Atlas Network Access and allow connections from the host running
+the backend. Never commit or share the URI.
+
 ## Importing restaurants
 
 **From the command line** (needs MongoDB mode):
