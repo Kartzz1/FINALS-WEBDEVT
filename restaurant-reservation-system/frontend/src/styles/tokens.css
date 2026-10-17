@@ -1,0 +1,203 @@
+/* Design tokens: the single source of truth for the visual system.
+   Every colour, size, radius, shadow, and timing used elsewhere comes from here.
+   Two themes: the light values live in :root, the dark values in [data-theme="dark"].
+   Colours are always flat, solid values.
+
+   Identity: ivory and near-black with a muted gold accent, an elegant serif for headlines,
+   and a clean sans for everything that has to be read quickly.
+
+   Breakpoints (CSS variables cannot be used inside media queries, so these are
+   fixed): 480px small phones, 768px tablets, 1024px laptops, 1280px desktops. */
+:root {
+  color-scheme: light;
+
+  /* Colour. "primary" is the gold accent used for text, rules, and highlights.
+     The main button itself is near-black glass (see the button tokens). */
+  --color-primary: #7a5c24;
+  --color-primary-hover: #664b1c;
+  --color-primary-active: #523c15;
+  --color-primary-contrast: #ffffff;
+  --color-primary-soft: #efe6d3;
+
+  --color-background: #f6f3ee;
+  --color-surface: #fbfaf7;
+  --color-surface-elevated: #ffffff;
+  --color-surface-inset: #ece7df;
+  --color-glass: rgba(251, 250, 247, 0.78);
+  --color-glass-strong: rgba(255, 255, 255, 0.92);
+  --color-glass-border: rgba(255, 255, 255, 0.7);
+  --color-overlay: rgba(21, 18, 15, 0.5);
+  --color-hover: rgba(21, 18, 15, 0.05);
+
+  --color-text-primary: #15120f;
+  --color-text-secondary: #4a443d;
+  --color-text-muted: #6a635a;
+
+  --color-border: #ddd6ca;
+  --color-border-strong: #8b8378; /* control outlines, at least 3:1 against the background */
+  --color-focus: #1d4f91;
+
+  --color-success: #1f5d34;
+  --color-success-bg: #dcebdf;
+  --color-warning: #7a4d00;
+  --color-warning-bg: #f3e5c6;
+  --color-error: #a12626;
+  --color-error-bg: #f5dcd7;
+  --color-info: #2a5a85;
+  --color-info-bg: #dae7f1;
+
+  /* Dark feature panels (sign-in side panel, call-to-action band): the same in both themes. */
+  --color-brand-panel: #15120f;
+  --color-brand-panel-text: #f6f3ee;
+  --color-brand-panel-muted: #b9b0a3;
+  --color-brand-accent: #d9b878;
+
+  /* Elevation: level 0 is flat. Raised levels pair a soft light and dark shadow. */
+  --shadow-1: 2px 3px 8px rgba(120, 108, 90, 0.14), -2px -2px 6px rgba(255, 255, 255, 0.9);
+  --shadow-2: 6px 8px 20px rgba(120, 108, 90, 0.16), -4px -4px 14px rgba(255, 255, 255, 0.9);
+  --shadow-3: 14px 18px 40px rgba(120, 108, 90, 0.2), -6px -6px 18px rgba(255, 255, 255, 0.9);
+  --shadow-inset: inset 2px 2px 5px rgba(120, 108, 90, 0.16), inset -2px -2px 4px rgba(255, 255, 255, 0.8);
+  --shadow-glass: 0 4px 20px rgba(21, 18, 15, 0.08);
+
+  /* Liquid-glass buttons: a translucent fill, a thin edge, a light line along the top and a
+     shade along the bottom (inner shadows), and a soft blur of what is behind. */
+  --glass-blur: 10px;
+  --button-fill: rgba(255, 255, 255, 0.7);
+  --button-fill-hover: rgba(255, 255, 255, 0.96);
+  --button-border: rgba(21, 18, 15, 0.18);
+  --button-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  --button-shade: inset 0 -1px 0 rgba(21, 18, 15, 0.06);
+  --button-primary-fill: rgba(21, 18, 15, 0.95);
+  --button-primary-fill-hover: rgba(52, 44, 36, 0.98);
+  --button-primary-fill-active: rgba(0, 0, 0, 1);
+  --button-primary-border: rgba(21, 18, 15, 0.95);
+  --button-primary-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+
+  /* Colours of the drawn plate in the hero (flat shapes, the same in both themes). */
+  --illus-plate: #fbfaf7;
+  --illus-plate-rim: #e4ddd0;
+  --illus-leaf-a: #4f7f4b;
+  --illus-leaf-b: #6d9c58;
+  --illus-leaf-c: #3d6b40;
+  --illus-tomato: #c9442e;
+  --illus-tomato-light: #e0654d;
+  --illus-carrot: #e28b3b;
+  --illus-meat: #ecd7b6;
+  --illus-meat-grill: #8c6b46;
+  --illus-pepper: #5f9a3f;
+
+  /* Typography: a serif for headlines, one sans for the interface. */
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Playfair Display", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --text-display: clamp(2.375rem, 1.2rem + 4.6vw, 4rem);
+  --text-h1: clamp(1.75rem, 1.35rem + 1.6vw, 2.25rem);
+  --text-h2: 1.375rem;
+  --text-h3: 1.125rem;
+  --text-body: 1rem;
+  --text-button: 0.9375rem;
+  --text-label: 0.875rem;
+  --text-small: 0.875rem;
+  --text-caption: 0.8125rem;
+  --leading-tight: 1.2;
+  --leading-body: 1.6;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --tracking-tight: -0.015em;
+
+  /* Spacing: a 4px scale. The number is the size in quarter-rems (space-4 = 16px). */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Radius: restrained, stepped by hierarchy. Buttons are full pills. */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-standard: ease-in-out;
+
+  /* Layers */
+  --z-header: 100;
+  --z-toast: 300;
+  --z-skip-link: 400;
+
+  /* Layout */
+  --container: 70rem;
+  --control-height: 2.75rem;
+  --header-height: 4.25rem;
+}
+
+/* Dark theme: the same tokens, tuned so every text pair still clears WCAG AA. */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-primary: #d9b878;
+  --color-primary-hover: #e6c98f;
+  --color-primary-active: #c9a560;
+  --color-primary-contrast: #15120f;
+  --color-primary-soft: #2b2418;
+
+  --color-background: #0f0e0d;
+  --color-surface: #171513;
+  --color-surface-elevated: #1f1c19;
+  --color-surface-inset: #0b0a09;
+  --color-glass: rgba(23, 21, 19, 0.72);
+  --color-glass-strong: rgba(31, 28, 25, 0.92);
+  --color-glass-border: rgba(255, 255, 255, 0.1);
+  --color-overlay: rgba(0, 0, 0, 0.65);
+  --color-hover: rgba(255, 255, 255, 0.06);
+
+  --color-text-primary: #f3efe9;
+  --color-text-secondary: #c4bcb0;
+  --color-text-muted: #a0978a;
+
+  --color-border: #2f2b26;
+  --color-border-strong: #857b6e;
+  --color-focus: #8fbcf2;
+
+  --color-success: #84d49e;
+  --color-success-bg: #16301f;
+  --color-warning: #e8bb6a;
+  --color-warning-bg: #35290f;
+  --color-error: #f4a199;
+  --color-error-bg: #3d1c19;
+  --color-info: #94c4ec;
+  --color-info-bg: #152b3d;
+
+  --color-brand-panel: #15120f;
+  --color-brand-panel-text: #f6f3ee;
+  --color-brand-panel-muted: #b9b0a3;
+  --color-brand-accent: #d9b878;
+
+  --shadow-1: 2px 2px 6px rgba(0, 0, 0, 0.5), -2px -2px 6px rgba(255, 255, 255, 0.03);
+  --shadow-2: 5px 5px 14px rgba(0, 0, 0, 0.55), -4px -4px 12px rgba(255, 255, 255, 0.035);
+  --shadow-3: 10px 10px 28px rgba(0, 0, 0, 0.65), -6px -6px 18px rgba(255, 255, 255, 0.035);
+  --shadow-inset: inset 2px 2px 5px rgba(0, 0, 0, 0.6), inset -2px -2px 4px rgba(255, 255, 255, 0.035);
+  --shadow-glass: 0 6px 24px rgba(0, 0, 0, 0.4);
+
+  --button-fill: rgba(255, 255, 255, 0.07);
+  --button-fill-hover: rgba(255, 255, 255, 0.13);
+  --button-border: rgba(255, 255, 255, 0.18);
+  --button-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  --button-shade: inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+  --button-primary-fill: rgba(217, 184, 120, 0.95);
+  --button-primary-fill-hover: rgba(230, 201, 143, 0.98);
+  --button-primary-fill-active: rgba(201, 165, 96, 1);
+  --button-primary-border: rgba(240, 214, 160, 0.5);
+  --button-primary-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
