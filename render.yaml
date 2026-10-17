@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: finals-webdevt-api
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: STORAGE_MODE
+        value: mongo
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLIENT_URL
+        value: https://finals-webdevt.vercel.app
+      - key: COOKIE_SAMESITE
+        value: none
+      - key: TRUST_PROXY
+        value: true
